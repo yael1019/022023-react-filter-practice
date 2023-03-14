@@ -1,6 +1,6 @@
-function StateCard(props) {
+function StateCard({ sName }) {
   return (
-    <span className="border-black">State Name Here</span>
+    <span className="border-black">{ sName }</span>
   )
 }
 

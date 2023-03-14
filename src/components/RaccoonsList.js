@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import RaccoonCard from './RaccoonCard'
 
 const raccoons = [
@@ -7,7 +8,13 @@ const raccoons = [
   { id: 4, name: "Red", favFood: "hamburgers" },
 ]
 
+
+
 function RaccoonsList() {
+  // creating a state for the select
+  const [food, setFood] = useState('All');
+  // creating an array depending on what food is equal to
+  const filtered = food === "All" ? raccoons : raccoons.filter(raccoon => food === raccoon.favFood);
 
   return (
     <div className="raccoons-list border-black">
@@ -15,7 +22,8 @@ function RaccoonsList() {
       <h2>Raccoons</h2>
 
       {/* filter shown raccoons so it only shows the ones who like what's currently selected */}
-      <select>
+      <select onChange={(e) => setFood(e.target.value)}>
+        <option value="All">Pick One:</option>
         <option value="pizza">Pizza</option>
         <option value="hamburgers">Hamburgers</option>
       </select>
@@ -23,7 +31,15 @@ function RaccoonsList() {
       <div className="flex">
 
         {/* Delete the card below and replace it with the raccoons array mapped onto cards */}
-        <RaccoonCard name="Bob" favFood="pizza" />
+        {
+          filtered.map(raccoon => {
+            return (
+              <RaccoonCard
+                name={raccoon.name}
+                favFood={raccoon.favFood}
+              />)
+          })
+        }
 
       </div>
 
