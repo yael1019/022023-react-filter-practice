@@ -9,7 +9,10 @@ function StatesList(props) {
   // created a state for the change of input 
   const [state, setState] = useState('');
   // filtered the array based on what was inputted 
-  const filtered = state === "" ? stateNames : stateNames.filter(sName => state.toLowerCase() === sName.toLowerCase());
+  const filtered = stateNames.filter(sName => sName.toLowerCase().includes(state.toLocaleLowerCase()));
+  // or you can do state.toLowerCase() === sName.toLowerCase(), but then you have to type the whole state name 
+  // we do not need the terniary statement here if we use .includes because each state technically includes an empty string
+  // if use strictly equals to we will need the terinary statement to check if state === "" ? stateNames : filter the array
 
   return (
     <div className="states-list border-black">
